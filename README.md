@@ -66,19 +66,23 @@ Users can register by providing their email, password, username, and phone numbe
 
 **Code Example:**
 
-signUp.addEventListener('click', (e) => {  
-    var email = document.getElementById('email').value;  
-    var password = document.getElementById('password').value;  
-    var username = document.getElementById('username').value;  
-    var phoneNumber = document.getElementById('number').value;  
+signUp.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String email = document.getElementById("email").getValue();
+        String password = document.getElementById("password").getValue();
+        String username = document.getElementById("username").getValue();
+        String phoneNumber = document.getElementById("number").getValue();
 
-    createUserWithEmailAndPassword(auth, email, password)  
-        .then((userCredential) => {  
-            sendEmailVerification(auth.currentUser)  
-                .then(() => {  
-                    alert("Email verification link sent!");  
-                });  
-        });  
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) -> {
+                sendEmailVerification(auth.currentUser)
+                    .then(() -> {
+                        System.out.println("Email verification link sent!");
+                    });
+            });
+    }
 });
+
 
 
