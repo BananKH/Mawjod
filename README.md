@@ -54,4 +54,20 @@
 
 ## Usage
 **Student Registration**
-Users can register by providing their email, password, username, and phone number. Firebase's ```bash createUserWithEmailAndPassword``` function handles account creation.
+Users can register by providing their email, password, username, and phone number. Firebase's ``` createUserWithEmailAndPassword``` function handles account creation.
+**Code Example:**
+```bash signUp.addEventListener('click', (e) => {  
+    var email = document.getElementById('email').value;  
+    var password = document.getElementById('password').value;  
+    var username = document.getElementById('username').value;  
+    var phoneNumber = document.getElementById('number').value;  
+
+    createUserWithEmailAndPassword(auth, email, password)  
+        .then((userCredential) => {  
+            sendEmailVerification(auth.currentUser)  
+                .then(() => {  
+                    alert("Email verification link sent!");  
+                });  
+        });  
+});``` 
+
