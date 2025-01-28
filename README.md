@@ -48,5 +48,10 @@
 3. Set up Firebase:
    - Create a Firebase project at [Firebase Console](https://console.firebase.google.com/u/0/).
    - Add your Firebase configuration to the project.
+4. Enable authentication providers (Email/Password, Phone, Google, Facebook) in the Firebase Console.
 
-Enable authentication providers (Email/Password, Phone, Google, Facebook) in the Firebase Console.
+---
+
+## Usage
+**Student Registration**
+Users can register by providing their email, password, username, and phone number. Firebase's ```bash createUserWithEmailAndPassword``` function handles account creation.
