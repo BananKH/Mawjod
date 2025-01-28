@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    #login-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .left {
+      width: 50%;
+      text-align: center;
+    }
+
+    .right {
+      width: 40%;
+      padding-left: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333333;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    input[type="submit"] {
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    .loginwith {
+      font-size: 16px;
+      color: #333333;
+      margin-bottom: 20px;
+    }
+
+    .social-signin {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 16px;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .facebook {
+      background-color: #3b5998;
+    }
+
+    .facebook:hover {
+      background-color: #2d4373;
+    }
+
+    .google {
+      background-color: #dd4b39;
+    }
+
+    .google:hover {
+      background-color: #c23321;
+    }
+  </style>
+</head>
+<body>
+  <div id="login-box">
+    <div class="left">
+      <h1>Login</h1>
+      <input
+        type="text"
+        id="email"
+        placeholder="Enter your email"
+        name="email"
+        required
+      />
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter your password"
+        name="password"
+        required
+      />
+      <input type="submit" value="Login" id="login" />
+      <div class="user-credintials">
+        <h3>Email:</h3><h5 id="displayEmail">none</h5>
+        <h3>Verify:</h3><h5 id="status">none</h5>
+      </div>
+    </div>
+    <div class="right">
+      <span class="loginwith"><h3>Sign in with Social network</h3></span>
+      <button class="social-signin facebook" id="facebooklogin">Login with Facebook</button>
+      <button class="social-signin google" id="loginGmail">Login with Google</button>
+      <p>Don't have an account? <a href="register.html">Create account</a></p>
+    </div>
+  </div>
+</body>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+  import { getDatabase, ref, update } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+  import { getAuth, GoogleAuthProvider, FacebookAuthProvider, getRedirectResult, signInWithRedirect,signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword ,onAuthStateChanged, sendEmailVerification} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+  apiKey: "AIzaSyCvngGEqneRLQk5cpm_xSQWI0lSwIYNp3Q",
+  authDomain: "mawjood-e566f.firebaseapp.com",
+  databaseURL: "https://mawjood-e566f-default-rtdb.firebaseio.com",
+  projectId: "mawjood-e566f",
+  storageBucket: "mawjood-e566f.appspot.com",
+  messagingSenderId: "828315538798",
+  appId: "1:828315538798:web:f3f0b7ba90abb503645d7f"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  let dspEmail=document.getElementById('displayEmail');
+  let status=document.getElementById('status');
+  const database = getDatabase(app);
+  const auth = getAuth(app);
+  const login = document.getElementById('login');
+  
+  login.addEventListener('click', (e) => {
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+
+        // Display user email
+      dspEmail.textContent = user.email;
+
+      // Check if user email is verified
+      status.textContent = user.emailVerified ? 'Verified' : 'Not Verified';
+
+        const dt = new Date();
+        // Update last login time
+        update(ref(database, 'users/' + user.uid), {
+          last_login: dt.toString()
+        })
+        .then(()=>{  
+           // Check if the user's email is verified
+        if (user.emailVerified) {
+          // Redirect to welcome page
+          window.location.href = "verification.html";
+        } else {
+          // Display a message or handle the scenario where email is not verified
+          alert('Please verify your email before logging in.');
+          // You can also prevent the redirection here if you don't want to alert the user
+        }
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the update operation
+        console.error('Error updating last login time:', error);
+      });
+    })
+      .catch((error) => {
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
+  });
+ 
+const signInWithGoogle=async()=>{
+  try {
+    const provider = new GoogleAuthProvider();
+    const result = await signInWithPopup(auth, provider);
+    console.log('Logged in user:', result.user);
+
+    // Redirect user to welcome page upon successful login
+    window.location.href = "welcome.html";
+  } catch (error) {
+    if (error.code === 'auth/popup-closed-by-user') {
+      console.log('Google login popup closed by the user');
+      // Optionally, display a message to the user informing them that the login popup was closed
+    } else {
+      console.error('Google login error:', error);
+      // Handle other errors
+    }
+  }
+};
+
+  // Add event listener to the Facebook login button
+  const signUp = document.getElementById('loginGmail');
+  if (signUp) {
+    signUp.addEventListener('click', signInWithGoogle);
+  }
+
+const signInWithFacebook = async () => {
+  try {
+    const provider = new FacebookAuthProvider();
+    const result = await signInWithPopup(auth, provider);
+    console.log('Logged in user:', result.user);
+
+    // Redirect user to welcome page upon successful login
+    window.location.href = "welcome.html";
+  } catch (error) {
+    if (error.code === 'auth/popup-closed-by-user') {
+      console.log('Facebook login popup closed by the user');
+      // Optionally, display a message to the user informing them that the login popup was closed
+    } else {
+      console.error('Facebook login error:', error);
+      // Handle other errors
+    }
+  }
+};
+
+  // Add event listener to the Facebook login button
+  const facebookLoginButton = document.getElementById('facebooklogin');
+  if (facebookLoginButton) {
+    facebookLoginButton.addEventListener('click', signInWithFacebook);
+  }
+
+</script>
+</html>

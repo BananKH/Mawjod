@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Firebase Phone Verification</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link href="csssss.css" rel="stylesheet">
+<style>
+#login-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column; /* Changed from row to column */
+      align-items: center;
+      justify-content: center; /* Centering vertically */
+    }
+
+    .custom-button {
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin: 10px 0; /* Changed to add space between buttons */
+      width: 100%; /* Button width set to 100% */
+    }
+
+    input[type="text"] {
+      font-size: 16px; /* Adjust font size as needed */
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%; /* Input width set to 100% */
+      box-sizing: border-box; /* Ensure padding and border are included in width */
+    }
+</style>
+  </head>
+  <body>
+    <div id="login-box">
+    <form>
+      <h1>Firebase Phone verification</h1>
+      <div class="formcontainer">
+      <hr/>
+      <div class="container">
+      <input type="text" id="verificationCode" placeholder="Enter verification code">
+      
+      </div>
+      <!-- <button class="custom-button" type="button" onclick="otp();">Send OTP</button> -->
+      <button class="custom-button" type="button" onclick="codeverify();">Verify Code</button>
+    
+    </form>
+  </div>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase.js"></script>
+    <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+  appId: "1:828315538798:web:f3f0b7ba90abb503645d7f",
+  apiKey: "AIzaSyCvngGEqneRLQk5cpm_xSQWI0lSwIYNp3Q",
+  authDomain: "mawjood-e566f.firebaseapp.com",
+  projectId: "mawjood-e566f",
+  databaseURL: "https://mawjood-e566f-default-rtdb.firebaseio.com",
+  storageBucket: "mawjood-e566f.appspot.com",
+  messagingSenderId: "828315538798",
+  //measurementId: "G-P2J6SJZ7QZ"
+  };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+     firebase.analytics();
+</script>
+    <script src="firebasee.js" type="text/javascript"></script>
+  </body>
+</html>

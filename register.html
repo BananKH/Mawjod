@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>authentication</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    #login-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .left {
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333333;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    input[type="submit"] {
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div id="login-box">
+    <div class="left">
+      <h1>Sign up</h1>
+      <input
+      type="text"
+      id="email"
+      placeholder="Enter your email"
+      name="email"
+      required
+      />
+      <input
+      type="text"
+      id="username"
+      placeholder="Enter your name"
+      name="name"
+      required
+      />
+      <input
+      type="password"
+      id="password"
+      placeholder="Enter your password"
+      name="password"
+      required
+      />
+        <input type="text" id="number" placeholder="Enter phone number" name="uname" required>
+      <div id="recaptcha-container"></div>
+      <input type="submit" onclick="phoneAuth();" value="Submit" id="signUp" />
+      <div class="user-credintials">
+        <h3>Email:</h3><h5 id="displayEmail">none</h5>
+        <h3>Verify:</h3><h5 id="status">none</h5>
+      </div>
+      <p>Already registered? <a href="login.html">Login here</a></p>
+    </div>
+  </div>
+</body>
+<script src="firebasee.js" type="text/javascript"></script>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+  import { getDatabase,set,ref } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+  import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+  apiKey: "AIzaSyCvngGEqneRLQk5cpm_xSQWI0lSwIYNp3Q",
+  authDomain: "mawjood-e566f.firebaseapp.com",
+  databaseURL: "https://mawjood-e566f-default-rtdb.firebaseio.com",
+  projectId: "mawjood-e566f",
+  storageBucket: "mawjood-e566f.appspot.com",
+  messagingSenderId: "828315538798",
+  appId: "1:828315538798:web:f3f0b7ba90abb503645d7f"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+  const auth = getAuth();
+  const signUp = document.getElementById('signUp'); // Get the signUp button element
+  let dspEmail=document.getElementById('displayEmail');
+  let status=document.getElementById('status');
+
+  signUp.addEventListener('click', (e) => {
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    var username = document.getElementById('username').value;
+    var phoneNumber = document.getElementById('number').value;
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      sendEmailVerification(auth.currentUser)
+        .then(()=>{
+      alert("Email verification link sent!");
+        })
+      // Signed up
+      const user = userCredential.user;
+      dspEmail.textContent=user.email;
+      status.textContent=user.emailVerified;
+      // Store user data
+      set(ref(database, 'users/' + user.uid), {
+        username: username,
+        email: email,
+        number: phoneNumber
+      })
+
+       .then(() => {
+       window.location.href = "login.html";
+       })
+      .catch((error) => {
+        console.error("Error storing user data", error);
+      });
+    })
+    .catch((error) => {
+      const errorMessage = error.message;
+      alert(errorMessage);
+      console.error("Error signing up", error);
+    });
+  });
+</script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase.js"></script>
+</html>

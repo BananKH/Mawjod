@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333333;
+    }
+
+    .subject-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+    }
+
+    .subject {
+      background-color: #4caf50;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .subject:hover {
+      background-color: #45a049;
+    }
+
+    .subject-icon {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .subject-title {
+      font-size: 18px;
+    }
+
+    /* Customize styles for each subject */
+    .subject.calculus {
+      background-color: #2196f3; /* Blue */
+    }
+
+    .subject.authentication {
+      background-color: #f44336; /* Red */
+    }
+
+    .subject.CPP {
+      background-color: #ff9800; /* Orange */
+    }
+
+    .subject.pyhton {
+      background-color: #9c27b0; /* Purple */
+    }
+
+    .subject.islamic {
+      background-color: #009688; /* Teal */
+    }
+
+    .subject.history {
+      background-color: #450688; /* Teal */
+    }
+    .logout-btn {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4caf50;
+        color: white;
+        font-size: 16px;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .logout-btn:hover {
+        background-color: #45a049;
+      }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Subject Dashboard</h1>
+    <div class="subject-grid">
+      <a href="calculus.html" class="subject calculus">
+        <div class="subject-icon">W</div>
+        <div class="subject-title">Web Security</div>
+      </a>
+      <a href="authentication.html" class="subject authentication">
+        <div class="subject-icon">A</div>
+        <div class="subject-title">Authentication</div>
+      </a>
+      <a href="C++.html" class="subject CPP">
+        <div class="subject-icon">C</div>
+        <div class="subject-title">C++</div>
+      </a>
+      <a href="pyhton.html" class="subject pyhton">
+        <div class="subject-icon">P</div>
+        <div class="subject-title">Pyhton</div>
+      </a>
+      <a href="islamic.html" class="subject islamic">
+        <div class="subject-icon">C</div>
+        <div class="subject-title">Cryptography</div>
+      </a>
+      <a href="histort.html" class="subject history">
+        <div class="subject-icon">A</div>
+        <div class="subject-title">Assembly</div>
+      </a>
+  
+    </div>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  <script>
+    function logout() {
+      // Implement your logout functionality here
+      window.location.href = "login.html";
+    }
+  </script>
+  </div>
+</body>
+</html>
