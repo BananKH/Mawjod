@@ -84,6 +84,105 @@ Users can register by providing their email, password, username, and phone numbe
   </code>
 </pre>
 
+**Email Verification**
+After registration, users receive an email verification link. Only verified users can log in.
+
+**Code Example:**
+<pre>
+  <code class="language-javascript">
+const user = userCredential.user;  
+dspEmail.textContent = user.email;  
+status.textContent = user.emailVerified;  
+ </code>
+</pre>
+
+**Login**
+Users log in using their verified email and password. Firebase's `signInWithEmailAndPassword` function handles authentication.
+
+**Code Example:**
+<pre>
+  <code class="language-javascript">
+login.addEventListener('click', (e) => {  
+    var email = document.getElementById('email').value;  
+    var password = document.getElementById('password').value;  
+
+    signInWithEmailAndPassword(auth, email, password)  
+        .then((userCredential) => {  
+            const user = userCredential.user;  
+            if (user.emailVerified) {  
+                window.location.href = "verification.html";  
+            } else {  
+                alert('Please verify your email before logging in.');  
+            }  
+        });  
+}); 
+ </code>
+</pre> 
+
+**Two-Factor Authentication (2FA)**
+After email and password verification, users are directed to a 2FA page. A verification code is sent to their phone number via SMS.
+**Code Example:**
+<pre>
+  <code class="language-javascript">
+function phoneAuth() {  
+    var phoneNumber = document.getElementById('number').value;  
+    firebase.auth().signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier)  
+        .then(function (confirmationResult) {  
+            window.confirmationResult = confirmationResult;  
+        });  
+}  
+
+function codeverify() {  
+    var code = document.getElementById('verificationCode').value;  
+    confirmationResult.confirm(code)  
+        .then(function (result) {  
+            window.location.href = "welcome.html";  
+        });  
+}  
+</code>
+</pre> 
+
+---
+
+## Authentication Providers
+Mawjood supports the following authentication methods:
+
+1. Email/Password
+2. Phone
+3. Google
+4. Facebook
+**Google Login Example**
+<pre>
+  <code class="language-javascript">
+const signInWithGoogle = async () => {  
+    const provider = new GoogleAuthProvider();  
+    const result = await signInWithPopup(auth, provider);  
+    window.location.href = "welcome.html";  
+};  
+</code>
+</pre> 
+**Facebook Login Example**
+<pre>
+  <code class="language-javascript">
+const signInWithFacebook = async () => {  
+    const provider = new FacebookAuthProvider();  
+    const result = await signInWithPopup(auth, provider);  
+    window.location.href = "welcome.html";  
+};  
+</code>
+</pre> 
+
+---
+
+## Firebase Integration
+Firebase powers Mawjood's backend with:
+
+- **Authentication:** Secure user login and registration.
+
+- **Realtime Database:** Stores attendance records and user data.
+
+- **Cloud Functions:** Optional for advanced backend logic.
+
 
 
 
