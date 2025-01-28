@@ -57,7 +57,9 @@
 Users can register by providing their email, password, username, and phone number. Firebase's ```createUserWithEmailAndPassword``` function handles account creation.
 
 **Code Example:**
-```bash signUp.addEventListener('click', (e) => {  
+<pre>
+  <code class="language-java">
+   signUp.addEventListener('click', (e) => {  
     var email = document.getElementById('email').value;  
     var password = document.getElementById('password').value;  
     var username = document.getElementById('username').value;  
@@ -71,4 +73,6 @@ Users can register by providing their email, password, username, and phone numbe
                 });  
         });  
 }); 
+</code>
+</pre>
 
