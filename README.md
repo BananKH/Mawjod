@@ -1,6 +1,6 @@
 # Mawjood: Attendance Web Application with Firebase Integration  
 
-![Firebase Logo](Screenshot 2025-01-28 130657.png)  
+![Firebase Logo](logo.png)  
 
 ## Table of Contents  
 - [Project Overview](#project-overview)  
