@@ -2,6 +2,9 @@
 
 ![Firebase Logo](logo.png)
 
+**Done By Farah Hammodah & Banan Khanfar**
+**Supervised by: Dr.Oraib AbuAlghanam**
+
 ## Table of Contents
 
 - [Project Overview](#project-overview)
