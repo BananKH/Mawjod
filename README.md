@@ -1,50 +1,57 @@
-# Mawjood: Attendance Web Application with Firebase Integration  
+# Mawjood: Attendance Web Application with Firebase Integration
 
-![Firebase Logo](logo.png)  
+![Firebase Logo](logo.png)
 
-## Table of Contents  
-- [Project Overview](#project-overview)  
-- [Features](#features)  
-- [Technologies Used](#technologies-used)  
-- [Installation](#installation)  
-- [Usage](#usage)  
-- [Authentication Providers](#authentication-providers)  
-- [Firebase Integration](#firebase-integration)  
-- [Contributing](#contributing)  
-- [License](#license)  
-- [References](#references)  
+## Table of Contents
 
----
-
-## Project Overview  
-**Mawjood** is a web application designed to help teachers track student attendance efficiently. It records **present** and **absent** statuses and leverages **Firebase** for secure authentication, real-time database updates, and enhanced functionality.  
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Authentication Providers](#authentication-providers)
+- [Firebase Integration](#firebase-integration)
+- [Contributing](#contributing)
+- [License](#license)
+- [References](#references)
 
 ---
 
-## Features  
-- **Student Registration**: Users can register using email, password, username, and phone number.  
-- **Email Verification**: Ensures only verified users can access the system.  
-- **Two-Factor Authentication (2FA)**: Adds an extra layer of security using phone verification.  
-- **Dashboard**: Students can view enrolled courses and mark attendance by scanning a QR code.  
-- **Multiple Authentication Options**: Supports email/password, phone, Google, and Facebook login.  
+## Project Overview
+
+**Mawjood** is a web application designed to help teachers track student attendance efficiently. It records **present** and **absent** statuses and leverages **Firebase** for secure authentication, real-time database updates, and enhanced functionality.
 
 ---
 
-## Technologies Used  
-- **Frontend**: HTML, CSS, JavaScript  
-- **Backend**: Firebase (Authentication, Realtime Database)  
-- **Authentication Providers**: Google, Facebook, Phone, Email/Password  
-- **Other Tools**: Firebase SDK, reCAPTCHA  
+## Features
+
+- **Student Registration**: Users can register using email, password, username, and phone number.
+- **Email Verification**: Ensures only verified users can access the system.
+- **Two-Factor Authentication (2FA)**: Adds an extra layer of security using phone verification.
+- **Dashboard**: Students can view enrolled courses and mark attendance by scanning a QR code.
+- **Multiple Authentication Options**: Supports email/password, phone, Google, and Facebook login.
 
 ---
 
-## Installation  
-1. Clone the repository:  
-   ```bash  
-   git clone https://github.com/your-repo/mawjood.git  
+## Technologies Used
+
+- **Frontend**: HTML, CSS, JavaScript
+- **Backend**: Firebase (Authentication, Realtime Database)
+- **Authentication Providers**: Google, Facebook, Phone, Email/Password
+- **Other Tools**: Firebase SDK, reCAPTCHA
+
+---
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo/mawjood.git
+   ```
 2. Navigate to the project directory:
    ```bash
-   cd mawjood  
+   cd mawjood
+   ```
 3. Set up Firebase:
    - Create a Firebase project at [Firebase Console](https://console.firebase.google.com/u/0/).
    - Add your Firebase configuration to the project.
@@ -53,26 +60,28 @@
 ---
 
 ## Usage
+
 **Student Registration**
-Users can register by providing their email, password, username, and phone number. Firebase's ```createUserWithEmailAndPassword``` function handles account creation.
+Users can register by providing their email, password, username, and phone number. Firebase's `createUserWithEmailAndPassword` function handles account creation.
 
 **Code Example:**
+
 <pre>
   <code class="language-java">
-   signUp.addEventListener('click', (e) => {  
-    var email = document.getElementById('email').value;  
-    var password = document.getElementById('password').value;  
-    var username = document.getElementById('username').value;  
-    var phoneNumber = document.getElementById('number').value;  
+   signUp.addEventListener('click', (e) -> {  
+    String email = document.getElementById('email').value;  
+    String password = document.getElementById('password').value;  
+    String username = document.getElementById('username').value;  
+    String phoneNumber = document.getElementById('number').value;  
 
     createUserWithEmailAndPassword(auth, email, password)  
-        .then((userCredential) => {  
+        .then((userCredential) -> {  
             sendEmailVerification(auth.currentUser)  
-                .then(() => {  
-                    alert("Email verification link sent!");  
+                .then(() -> {  
+                    System.out.println("Email verification link sent!");  
                 });  
         });  
 }); 
-</code>
+   </code>
 </pre>
 
