@@ -2,7 +2,12 @@
 
 ![Firebase Logo](logo.png)
 
+<p align="center">
+  <img src="logo.png" alt="Image Description" width="300">
+</p>
+
 **Done By Farah Hammodah & Banan Khanfar**
+
 **Supervised by: Dr.Oraib AbuAlghanam**
 
 ## Table of Contents
