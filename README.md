@@ -1,9 +1,7 @@
 # Mawjood: Attendance Web Application with Firebase Integration
 
-![Firebase Logo](logo.png)
-
 <p align="center">
-  <img src="logo.png" alt="Image Description" width="300">
+  <img src="logo.png" alt="Image Description" width="250">
 </p>
 
 **Done By Farah Hammodah & Banan Khanfar**
