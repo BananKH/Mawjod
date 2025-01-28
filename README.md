@@ -45,3 +45,8 @@
 2. Navigate to the project directory:
    ```bash
    cd mawjood  
+3. Set up Firebase:
+   - Create a Firebase project at [Firebase Console](https://console.firebase.google.com/u/0/).
+   - Add your Firebase configuration to the project.
+
+Enable authentication providers (Email/Password, Phone, Google, Facebook) in the Firebase Console.
