@@ -18,8 +18,6 @@
 - [Authentication Providers](#authentication-providers)
 - [Firebase Integration](#firebase-integration)
 - [Contributing](#contributing)
-- [License](#license)
-- [References](#references)
 
 ---
 
